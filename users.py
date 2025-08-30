@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required
 from models import User
 from schemas import UserSchema
 
@@ -9,6 +10,7 @@ user_bp = Blueprint(
 
 # cream o lista de users din database
 @user_bp.get('/all')
+@jwt_required()
 def get_all_users():
     page = request.args.get('page', default=1, type=int)
     per_page = request.args.get('per_page', default=3, type=int)
