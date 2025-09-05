@@ -1,11 +1,12 @@
 from flask import Blueprint, jsonify, request
-from flask_jwt_extended import (create_access_token, 
-                                create_refresh_token, 
-                                jwt_required, get_jwt, 
-                                current_user, 
-                                get_jwt_identity
-                                )
-from models import User
+from flask_jwt_extended import (
+    create_access_token, 
+    create_refresh_token, 
+    jwt_required, get_jwt, 
+    current_user, 
+    get_jwt_identity
+    )
+from models import User, TokenBlockList
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -76,3 +77,18 @@ def refresh_access():
     return jsonify({
         'access_token': new_access_token
     })
+
+@auth_bp.get('/logout')
+@jwt_required()
+def logout_user():
+    jwt = get_jwt()
+
+    jti = jwt['jti']
+
+    token_blocklist_obj = TokenBlockList(jti=jti)
+
+    token_blocklist_obj.save()
+
+    return jsonify(
+        {'message':'Log out successfully'}
+    ) , 200
