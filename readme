@@ -1,0 +1,62 @@
+# JWT Auth Project
+
+This project demonstrates how to implement authentication using JSON Web Tokens (JWT) in a Flask web application. It provides a secure way to authenticate users and protect API endpoints.
+
+## Features
+
+- User registration and login
+- JWT-based authentication
+- Protected routes requiring valid tokens
+- Token refresh mechanism
+- Logout functionality
+
+## Technologies Used
+
+- Python
+- Flask
+- PyJWT
+- bcrypt
+- SQLite
+
+## Getting Started
+
+### Prerequisites
+
+- Python installed
+- Flask installed
+
+### Installation
+
+1. Clone the repository:
+    ```
+    git clone https://github.com/yourusername/jwt-auth-project.git
+    cd jwt-auth-project
+    ```
+2. Install dependencies:
+    ```
+    pip install -r requirements.txt
+    ```
+3. Set environment variables as needed (e.g., JWT secret).
+
+4. Start the Flask server:
+    ```
+    flask run
+    ```
+
+## API Endpoints
+
+- `POST /register` - Register a new user
+- `POST /login` - Authenticate user and receive JWT
+- `GET /protected` - Access protected route (requires JWT)
+- `POST /refresh` - Refresh JWT token
+- `POST /logout` - Logout user
+
+## Usage
+
+1. Register a new user via `/register`.
+2. Login via `/login` to receive a JWT token.
+3. Use the token in the `Authorization` header (`Bearer <token>`) to access protected routes.
+
+## License
+
+This project is licensed under the MIT License.
