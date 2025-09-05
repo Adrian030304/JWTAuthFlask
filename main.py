@@ -18,6 +18,14 @@ def create_app():
     app.register_blueprint(user_bp, url_prefix='/users')
 
 
+    # additional claims
+    @jwt.additional_claims_loader
+    def make_additional_claims(user_identity):
+        if user_identity == 'Adrian':
+            return {'is_staff': True}
+        return {'is_staff': False}
+
+
     # jwt error handlers
     @jwt.expired_token_loader
     def expired_token_callback(jwt_header, jwt_data):
